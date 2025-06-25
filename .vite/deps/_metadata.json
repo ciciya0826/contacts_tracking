@@ -1,0 +1,55 @@
+{
+  "hash": "e1233f40",
+  "configHash": "c79e2e15",
+  "lockfileHash": "71467dbf",
+  "browserHash": "70ebd313",
+  "optimized": {
+    "localforage": {
+      "src": "../../node_modules/localforage/dist/localforage.js",
+      "file": "localforage.js",
+      "fileHash": "1153084f",
+      "needsInterop": true
+    },
+    "match-sorter": {
+      "src": "../../node_modules/match-sorter/dist/match-sorter.esm.js",
+      "file": "match-sorter.js",
+      "fileHash": "fb27f6de",
+      "needsInterop": false
+    },
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "876190e8",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "1ebc2ecb",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.mjs",
+      "file": "react-router-dom.js",
+      "fileHash": "22bf38e4",
+      "needsInterop": false
+    },
+    "sort-by": {
+      "src": "../../node_modules/sort-by/index.js",
+      "file": "sort-by.js",
+      "fileHash": "da2afbb7",
+      "needsInterop": true
+    }
+  },
+  "chunks": {
+    "chunk-M77MRNZL": {
+      "file": "chunk-M77MRNZL.js"
+    },
+    "chunk-45R4IVA7": {
+      "file": "chunk-45R4IVA7.js"
+    },
+    "chunk-7D4SUZUM": {
+      "file": "chunk-7D4SUZUM.js"
+    }
+  }
+}
