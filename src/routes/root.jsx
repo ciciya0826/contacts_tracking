@@ -6,15 +6,17 @@ import {
     Form,   //特殊的表单组件
     redirect,
     useNavigation,
+    useSubmit,
  } from "react-router-dom";
 import { getContacts,createContact } from "../contacts";
+import { useEffect } from "react";
 
 //async异步函数
 export async function loader({request}) {
     const url = new URL(request.url);   //转为URL对象实例
     const q = url.searchParams.get("q");    //获取名为q的查询参数的值
     const contacts = await getContacts(q);   //getContacts函数可能涉及到异步操作，所以要用await
-    return {contacts};
+    return {contacts,q};
 }
 
 export async function action(){
@@ -23,8 +25,19 @@ export async function action(){
 }
 
 export default function Root() {
-    const {contacts} = useLoaderData(); //useLoaderData钩子获取路由loader加载好的数据并解构出contacts
+    const {contacts,q} = useLoaderData(); //useLoaderData钩子获取路由loader加载好的数据并解构出contacts
     const navigation = useNavigation();
+    const submit = useSubmit();
+
+    const searching = 
+      navigation.location && 
+      new URLSearchParams(navigation.location.search).has(
+        "q"
+      );
+
+    useEffect(()=>{
+      document.getElementById("q").value =q;
+    },[q]);
 
   return (
     <>
@@ -34,15 +47,23 @@ export default function Root() {
           <Form id="search-form" role="search">
             <input
               id="q"
+              className={searching? "loading" : ""}
               aria-label="Search contacts"
               placeholder="Search"
               type="search"
               name="q"
+              defaultValue={q}
+              onChange={(event)=>{
+                const isFirstSearch = q == null;
+                submit(event.currentTarget.form,{
+                  replace:!isFirstSearch,
+                });
+              }}
             />
             <div
               id="search-spinner"
               aria-hidden
-              hidden={true}
+              hidden={!searching} //隐藏和搜索框中不匹配的搜索记录
             />
             <div
               className="sr-only"

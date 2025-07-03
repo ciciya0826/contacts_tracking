@@ -12,6 +12,7 @@ import Root,{
 import ErrorPage from "./error-page";
 import Contact,{
   loader as contactLoader,
+  action as contactAction,
 } from "./routes/contact";
 import EditContact,{
   action as editAction,
@@ -27,12 +28,16 @@ const router = createBrowserRouter([
     loader:rootLoader,  //组件渲染前执行的数据预加载函数
     action:rootAction,  //处理表单提交等数据变更的函数
     children:[
-      {index:true,element:<Index />}, //根路由没有渲染子路由时  默认
+      {
+        errorElement:<ErrorPage />,
+        children:[
+          {index:true,element:<Index />}, //根路由没有渲染子路由时  默认
       //将联系人路由作为根路由的子路由(要通过<Outlet>告诉在何处渲染子路由)root.jsx中
       {
         path:"contacts/:contactId", // :contact是动态参数占位符，这个位置的内容可以是任意值
         element:<Contact />,
         loader:contactLoader,
+        action:contactAction,
       },
       {
         path:"contacts/:contactId/edit",
@@ -45,6 +50,8 @@ const router = createBrowserRouter([
         action:destroyAction,
         errorElement:<div>Oops!There was an error.</div>,
       },
+        ]
+      }
     ]
   },
 ]);
